@@ -1,0 +1,59 @@
+---
+import { CardPlayButton } from "./CardPlayButton";
+import type { Playlist, ColorStore } from "@/interfaces/types";
+import { EventHandler } from "./EventHandler";
+import { Image } from 'astro:assets';
+
+interface Props {
+    playlist: Playlist;
+}
+
+const { playlist } = Astro.props;
+
+const { id, cover, title, color } = playlist;
+
+const articleId = `horizontal-card-${id}`;
+---
+
+<article
+    id={articleId}
+    class="group relative hover:bg-zinc-300/30 shadow-lg hover:shadow-xl bg-zinc-500/30 rounded-md transition-all duration-300 overflow-hidden cursor-pointer"
+>
+    <EventHandler articleId={articleId} color={color} client:only="react" />
+
+    <div
+        class="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 transition-all group-hover:opacity-100"
+    >
+        <CardPlayButton id={id} client:visible customClass="w-10 h-10 p-0" />
+    </div>
+    <a class="flex items-center gap-3" href={`/playlist/${id}`}>
+        <picture class="w-16">
+            <img src={cover} alt="" />
+        </picture>
+        <h4 class="font-semibold">{title}</h4>
+    </a>
+</article>
+
+<!-- <script type="module" define:vars={{ articleId, color }}>
+    import { useColorStore } from "./src/store/colorStore";
+
+    const article = document.getElementById(articleId);
+
+    if (article) {
+        const handleMouseEnter = () => {
+            // setBgColor(color.accent);
+            // console.log(color.accent);
+            console.log(useColorStore.getState().setBgColor({bgColor: color.accent}));
+            // useColorStore.setState(color.accent);
+            useColorStore.getState().setBgColor({bgColor: color.accent});
+        };
+
+        const handleMouseLeave = () => {
+            // setBgColor();
+            useColorStore.getState().setBgColor("#30275b");
+        };
+
+        article.addEventListener("mouseenter", handleMouseEnter);
+        article.addEventListener("mouseleave", handleMouseLeave);
+    }
+</script> -->

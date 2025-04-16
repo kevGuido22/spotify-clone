@@ -1,0 +1,23 @@
+---
+import HomeIcon from "@/icons/Home.astro"
+import SearchIcon from "@/icons/Search.astro"
+import LibraryIcon from "@/icons/Library.astro"
+import { PlayerMobile } from "./PlayerMobile";
+---
+
+<div class="w-full sm:hidden">
+    <PlayerMobile client:visible/>
+    <nav class="w-full">
+        <ul class="grid grid-cols-3 gap-6 justify-between items-center py-2 px-12">
+            <li>
+                <a href="/" class="flex flex-col items-center text-xs gap-1"><HomeIcon/>Inicio</a>
+            </li>
+            <li>
+                <a href="/#" class="flex flex-col items-center text-xs gap-1"><SearchIcon/>Buscar</a>
+            </li>
+            <li>
+                <a href="/#" class="flex flex-col items-center text-xs gap-1"><LibraryIcon/>Tu biblioteca</a>
+            </li>
+        </ul>
+    </nav>
+</div>
